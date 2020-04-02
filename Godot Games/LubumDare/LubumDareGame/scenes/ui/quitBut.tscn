@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://textures/ui/power_off.png" type="Texture" id=1]
+[ext_resource path="res://scripts/ui/quitBut.gd" type="Script" id=2]
+
+[node name="quitBut" type="TextureButton"]
+margin_left = 23.0
+margin_top = 19.3119
+margin_right = 98.0
+margin_bottom = 98.3119
+texture_normal = ExtResource( 1 )
+script = ExtResource( 2 )
+

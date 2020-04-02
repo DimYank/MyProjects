@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/CarSound.ogg-2ffa3bb974536318cd81b556c901132b.oggstr"
+
+[deps]
+
+source_file="res://backgroundmusic/CarSound.ogg"
+dest_files=[ "res://.import/CarSound.ogg-2ffa3bb974536318cd81b556c901132b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Billie Eilish - COPYCAT.ogg-bdc04625b12b712996d1f52c791f81b4.oggstr"
+
+[deps]
+
+source_file="res://radio/Billie Eilish - COPYCAT.ogg"
+dest_files=[ "res://.import/Billie Eilish - COPYCAT.ogg-bdc04625b12b712996d1f52c791f81b4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

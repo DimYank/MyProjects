@@ -1,0 +1,25 @@
+#!/bin/bash
+
+path=~/taskfiles/
+
+
+count=$(find $path -type f | wc -l)
+if (($count!=360))
+then 
+echo "Wrong number of files! "$count
+else
+echo "Correct number of files!"$count
+fi
+
+
+for filename in ~/taskfiles/*
+do
+awk -F ';' '{print $3 ";" $1 ";" $2 ";" $4 ";" $5;}' $filename>$filename".bak"
+sed -r 's:([0-9]{4})-([0-9]{2})-([0-9]{2}):\3/\2/\1:g' $filename".bak" > $filename
+rm $filename".bak"
+done
+# Файлы .bak здесь потому , что если просто записывать с помощью sed или awk
+# в тот же фал, то он оказывается пустым, например:
+#   awk -F ';' '{print $3 ";" $1 ";" $2 ";" $4 ";" $5;}' $filename>$filename
+# даст в итоге путой файл.
+

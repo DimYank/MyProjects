@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/MorgenshernOGG.ogg-0960d18ad38f880543aa21c5ace91b45.oggstr"
+
+[deps]
+
+source_file="res://radio/MorgenshernOGG.ogg"
+dest_files=[ "res://.import/MorgenshernOGG.ogg-0960d18ad38f880543aa21c5ace91b45.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

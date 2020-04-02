@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Y2K, bbno$ - Lalala.ogg-1a9e7ec7ab4a8fd2a548b3697a4ef02f.oggstr"
+
+[deps]
+
+source_file="res://radio/Y2K, bbno$ - Lalala.ogg"
+dest_files=[ "res://.import/Y2K, bbno$ - Lalala.ogg-1a9e7ec7ab4a8fd2a548b3697a4ef02f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

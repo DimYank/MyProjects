@@ -1,0 +1,37 @@
+#!/bin/bash
+
+echo task1
+
+mkdir ~/taskfiles
+
+head="cite        ; country ; date       ; views ; clicks"
+monthDate=""
+dayDate=""
+
+for ((month=1;month<13;month++))
+do
+for ((day=1;day<31;day++))
+do
+line1="www.abc.com; USA;"
+line2="www.cba.com; France;"
+if (($month<10))
+then
+monthDate=0$month
+else
+monthDate=$month
+fi
+if (($day<10))
+then
+dayDate=0$day
+else
+dayDate=$day
+fi
+filename=~/taskfiles/2017-$monthDate-$dayDate.csv
+line1=$line1"2017-"$monthDate"-"$dayDate";"$(((RANDOM%1000)+1))";"$(((RANDOM%1000)+1))";"
+line2=$line2"2017-"$monthDate"-"$dayDate";"$(((RANDOM%1000)+1))";"$(((RANDOM%1000)+1))";"
+touch $filename
+echo $head >  $filename
+echo $line1 >> $filename
+echo $line2 >> $filename
+done
+done

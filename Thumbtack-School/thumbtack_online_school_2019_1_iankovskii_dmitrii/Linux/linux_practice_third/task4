@@ -1,0 +1,32 @@
+#!/bin/bash
+
+reppath=~/repo/thumbtack_online_school_2019_1_iankovskii_dmitrii
+f=~/taskfiles/task4
+rm $f
+touch $f
+walk_dir() {
+for path in $1/*
+do
+if [ -d $path ]
+then
+walk_dir $path
+else
+if [[ $path == *".java"* ]]
+then
+cat $path >> $f
+fi
+fi
+done
+}
+
+
+
+for file in $reppath/*
+do
+if [ -d $file ]
+then
+walk_dir $file
+fi
+done
+
+echo "Task 4 Done!"

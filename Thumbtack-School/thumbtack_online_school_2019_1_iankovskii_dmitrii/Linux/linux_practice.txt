@@ -1,0 +1,109 @@
+В своём домашнем каталоге создать подкаталог linux_ex и зайти в него.
+mkdir linux_ex
+cd linux_ex
+
+Создать файл hello.txt  с текстом “Hello world”.
+touch hello.txt | echo Hello World > hello.txt
+
+Добавить в этот файл (разделяя пустыми строками)
+свои имя и фамилию, 
+echo Yankovskiy Dmitriy >> hello.txt
+текущую дату 
+date >> hello.txt
+имя пользователя
+whoami >> hello.txt 
+содержимое домашнего каталога (нерекурсивно, список имен файлов, включая скрытые)
+ls -a ~ >> hello.txt
+содержимое корневого каталога (нерекурсивно)
+ls / >> hello.txt
+содержимое каталога /etc
+ls /etc >> hello.txt
+только файлы в каталоге /etc 
+ls /etc -p | grep -v / >> hello.txt
+только подкаталоги в каталоге /etc (нерекурсивно)
+find /etc -maxdepth 1 -type d >> hello.txt
+содержимое файла /etc/passwd
+cat /etc/passwd >> hello.txt
+первый столбец файла /etc/passwd (список юзеров)
+cut /etc/passwd -d: -f1 >> hello.txt 
+содержимое файла /etc/group
+cat /etc/group >> hello.txt
+первый столбец файла /etc/group (список групп)
+cut /etc/group -d: -f1 >> hello.txt
+
+Вывести hello.txt с прокруткой
+cat hello.txt
+
+Разбить hello.txt на файлы размером 1к, затем собрать обратно.
+split -b 1K  hello.txt | cat x* > restored.hello.txt
+
+Заменить в hello.txt ‘/’ на ‘\’
+cat hello.txt | tr / '\' > hello.txt
+
+Скопировать /var/log в текущий каталог (кроме файлов без доступа) с сохранением времени модификации. В текущем каталоге должен появиться ./var/log
+cp -R --parents --preserve=timestamps /var/log .
+
+Для полученной копии
+	вывести объем занимаемого места
+du -sh var/log
+вывести все файлы, начинающиеся на ‘a’ (не каталоги)
+find var/log -name "a*" -type f
+удалить все файлы, начинающиеся на ‘a’ (не каталоги). Как убедиться, что выполнено правильно?
+rm var/log/a* -f
+        Проверка: find var/log -maxdepth 1 -name "a*" -type f - выводится 0 записей
+вывести все файлы со временем последней модификации больше 5 дней;
+find var/log -type f -mtime +5
+вывести все файлы со временем последней модификации меньше 5 дней;
+find var/log -type f -mtime -5
+создать каталог archive и переместить туда файлы (не каталоги) со временем	 модификации больше 5 дней.  
+find var/log -type f -mtime +5 -exec mv {} archive \;
+* переместить файлы как в прошлом задании, но сохраняя структуру каталогов.
+find var/log -mtime -5 -exec mv {} archive \;
+
+Найти все файлы (рекурсивно) с расширением jar в каталогах /opt и /usr.
+find -r /opt /usr -name "*.jar"
+Найти все каталоги, содержащие файлы с расширением jar в каталогах /opt и /usr, вывести по одному разу.
+find /opt /usr -name "*.jar" -type f | sed -r 's|/[^/]+$||' |sort -u
+Найти все файлы с расширением java, созданные месяц назад плюс-минус одна неделя.
+find /opt /usr -name "*.jar" -type f -ctime -37 -ctime +23
+В двух заданных каталогах должен быть одинаковый набор файлов. Нужно в этом убедиться, т.е. проверить, что совпадают множества файлов, имена и содержимое.
+diff /cat1 /cat2
+Установить вручную (без apt-get) java 8 и maven последней версии . Добавить путь запуска в переменную PATH, создать переменную M2_HOME. Выполнить сборку java проекта.
+1.1. Скачал JDK
+1.2. Распаковал sudo tar zxvf ~/Downloads/jdk-8u221-linux-x64.tar.gz
+1.2. Прописал переменные export JAVA_HOME=/usr/java/jdk1.8.0_221
+                         export PATH=$JAVA_HOME/bin:$PATH
+2.1. Скачал maven
+2.2. Распаковал sudo tar -xvzf ~/Downloads/apache-maven-3.6.2-bin.tar.gz
+2.3. Прописал переменные export M2_HOME=/opt/apache-maven-3.6.2
+                         export PATH=$M2_HOME/bin:$PATH
+3.1. Скачал WebHelloWorld.tar.gz
+3.2. Распаковал архив.
+3.3. Перешел в каталог проекта, собрал его. mvn compile
+
+Проанализировать загрузку процессора, объем памяти. Вывести информацию по использованию места в файловой системе. Найти самые большие каталоги (рекурсивно до уровня 2).
+                        top             free -m -h                                  df -h                           sudo du -a -maxd 2 -h | sort -r -n | head -10
+
+Создать двух юзеров (напр., ivanov, petrov), создать каталог /shared и дать полный доступ этим двум юзерам. У остальных не должно быть доступа даже на чтение.
+sudo adduser ivanov                             sudo mkdir /shared  
+                                                sudo groupadd shared 
+                                                sudo usermod -aG shared ivanov
+                                                sudo usermod -aG shared petrov
+                                                sudo sudo chgrp shared /shared
+                                                sudo chmod 070 /shared/
+
+Установить MySQL и создать базу ttschool, заполнить данными. Выполнить дамп базы в файл посредством pipe, затем восстановить из файла.
+1. Установка
+sudo apt update
+sudo apt install
+2. Создание БД
+sudo mysql
+create database ttschool;
+use ttschool;
+CREATE TABLE subject (id INT(11) NOT NULL AUTO_INCREMENT,name VARCHAR(50) NOT NULL,UNIQUE INDEX name (name),PRIMARY KEY (id)) ENGINE=INNODB DEFAULT CHARSET=utf8;
+INSERT INTO `subject`(name) VALUES ("test");
+INSERT INTO `subject`(name) VALUES ("test2");
+3. Дамп.
+sudo mysqldump -u root -p ttschool > ~/test_dump.sql
+4. Восстановление.
+sudo mysql -u root -p ttschool < ~/test_dump.sql

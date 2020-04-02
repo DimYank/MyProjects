@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://textures/ui/button.png" type="Texture" id=1]
+[ext_resource path="res://scripts/ui/radio_but.gd" type="Script" id=2]
+[ext_resource path="res://radio/Billie Eilish - bad guy.ogg" type="AudioStream" id=3]
+[ext_resource path="res://radio/Billie Eilish - COPYCAT.ogg" type="AudioStream" id=4]
+[ext_resource path="res://radio/Feder feat. Alex Aiono - Lordly (Original Mix).ogg" type="AudioStream" id=5]
+[ext_resource path="res://radio/Y2K, bbno$ - Lalala.ogg" type="AudioStream" id=6]
+[ext_resource path="res://radio/Либе - Любочка.ogg" type="AudioStream" id=7]
+
+[node name="TextureButton" type="TextureButton"]
+margin_left = 1732.05
+margin_top = 5.09666
+margin_right = 1921.05
+margin_bottom = 90.0967
+texture_normal = ExtResource( 1 )
+expand = true
+script = ExtResource( 2 )
+
+[node name="TrackThree" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -8.0
+
+[node name="TrackOne" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -8.0
+
+[node name="TrackTwo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -8.0
+
+[node name="TrackTwo2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -8.0
+
+[node name="TrackTwo3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -8.0
+

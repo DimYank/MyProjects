@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/OfficeSound.ogg-f5349a35158fd38360e4e5f5bc0d9b28.oggstr"
+
+[deps]
+
+source_file="res://backgroundmusic/OfficeSound.ogg"
+dest_files=[ "res://.import/OfficeSound.ogg-f5349a35158fd38360e4e5f5bc0d9b28.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

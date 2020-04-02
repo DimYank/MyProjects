@@ -1,0 +1,28 @@
+[
+		{
+			"type": "mes",
+			"cli": "test line",
+			"lub": null	
+		},
+		{
+			"type": "mes",			
+			"lub": "test line 2",
+			"cli": null
+		},
+		{
+			"type": "mes",
+			"cli": "test line!",
+			"lub": null	
+		},
+		{
+			"type": "cho",
+			"1": "Выбери меня!",
+			"2": "Нет, меня!",
+			"give": 100,
+			"take": 20
+		},
+		{
+			"type": "next",
+			"name": "test"
+		}
+]

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+path=~/taskfiles
+declare -A my
+my[1]=monday
+my[2]=tuesday
+my[3]=wednesday
+my[4]=thursday
+my[5]=friday
+my[6]=saturday
+my[7]=sunday
+day=1
+
+for file in ~/taskfiles/*
+do
+if ((day>7))
+then
+day=1
+fi
+touch $path"/"${my[$day]}".csv"
+if ! [ -s $path"/"${my[$day]}".csv" ]
+then
+head -n 1 $file > $path"/"${my[$day]}".csv"
+fi
+tail -n 2 $file >> $path"/"${my[$day]}".csv"
+rm $file
+((day++))
+done
+
+echo "Task 3 Done!"

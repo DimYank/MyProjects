@@ -1,0 +1,118 @@
+sudo ssh -i /home/yankovskij/Downloads/trainee_id_rsa trainee@172.16.9.19
+
+В sshd_config установил yes в PasswordAuthentication
+
+sudo servise sshd restart
+
+ssh-keygen -t rsa   генерим ключ на клиенте
+
+scp yankovskij@172.16.9.5:/home/yankovskij/.ssh/id_rsa.pub ~
+забираем ключ , копируя его на сервер
+
+cat id_rsa.pub >> authorized_keys - добавили ключ в доверенные
+залогинились новым ключем
+
+запретили вход по паролю в sshdconfig
+
+sudo screen -S "woo" - создали скрин
+
+java -jar WebHelloWorld.jar - запустили в нем приложение
+
+ctrj+A ctrl+D - вышли без завершения
+
+sudo screen -r woo - зашли обратно
+
+ctrl+D - вышли с остановкой
+
+создали файл сервиса в /etc/systemd/system и заполнили его конфигом
+
+перезапуск демона systemctl daemon-reload
+добавляем сервис systemctl enable my.service
+запускаем сервис systemctl start my.service
+смотрим лог sudo journalctl -u my.service
+открываем в текстовом браузере w3m http://127.0.0.1:4567/hello
+в логах видим Sep 15 05:09:58 trainee-vm-3 java[8851]: [qtp1902201140-10] INFO net.thumbtack.web.helloworld.HelloWorld - Request received from 127.0.0.1
+
+установили tcpdump и слушаем порт 4567:
+18:53:23.243429 IP localhost.4567 > localhost.57302: Flags [P.], seq 1:169, ack 372, win 512, options [nop,nop,TS val 1550820209 ecr 1550820207], length 168
+E....y@.@.P..............1...y.{...........
+\o.q\o.oHTTP/1.1 200 OK
+Date: Wed, 18 Sep 2019 12:53:23 GMT
+Content-Type: text/html;charset=utf-8
+Transfer-Encoding: chunked
+Server: Jetty(9.4.z-SNAPSHOT)
+
+B
+Hello World
+
+
+ngrep:
+sudo ngrep -d lo -q '.' 'host 127.0.0.1'
+Заходим на 127.0.0.1:4567/hello и видим пакет:
+    127.0.0.1:4567 -> 127.0.0.1:57296 [AP] #6
+    HTTP/1.1 200 OK..Date: Wed, 18 Sep 2019 12:49:34 GMT..Content-Type: text/html;charset=utf-8..Transfer-Encoding: chu
+    nked..Server: Jetty(9.4.z-SNAPSHOT)....B..Hello World   
+
+nginx:
+Настроил страничку с картинкой test.png
+запускаем tcpdump, чтобы видеть только GET запросы: 
+sudo tcpdump -i any -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x47455420'
+Видим, что браузер получет изображение:
+    \._T\.^.GET /test.png HTTP/1.1
+    Host: 127.0.0.1
+    User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+    Accept: image/webp,*/*
+    
+Также сделал 2 странички get.html и post.html:
+
+Запускаем tcpdump, чтобы видеть только GET запросы и заходим на get.html:
+Видим, что ответ от формы приходит в виде URL:
+    \.M.\.1.GET /get.html?answer=a2 HTTP/1.1
+    Host: 127.0.0.1
+    User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+
+Запускаем tcpdump, чтобы видеть только POST запросы
+sudo tcpdump -i any -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x504F5354'
+и заходим на post.html:
+Видим, что ответ находится в самом пакете:
+    E....i@.@.|............P..s.r.C\...........
+    \..9\..{POST /post.html HTTP/1.1
+    ...
+    answer=a2
+
+На первой страничке с test.png добавил функцию скачивания данного изображеия.
+После запуска sudo tcpdump -i any dst 127.0.0.1
+Видим, что при попытке скачать файл, отправляется GET зпрос.
+seq 809:1246, ack 380, win 512, options [nop,nop,TS val 1546210679 ecr 1546206569], length 437: HTTP: GET /test.png HTTP/1.1
+
+На первой страничке с test.png добавил функцию загрузки файла.
+После запуска sudo tcpdump -i any dst 127.0.0.1
+Не видим никаких пакетов с файлом, т.к. он никуда не отправляется.
+
+Настроил установку куки через конфиг nginx.
+add_header Set-Cookie lcid=0000;
+После запуска sudo tcpdump -i any dst 127.0.0.1 видим, что в пакете есть кука:
+    Host: 127.0.0.1
+    User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+    ...
+    Cookie: lcid=0000
+    ...
+
+Mysql/Iptables:
+Mysql усановлен с прошлого занятия.
+Блокируем входящие соединения на 3306 порт:
+sudo iptables -A INPUT -p tcp --dport 3306 -j REJECT
+При попытке подключиться видим:
+ERROR 2003 (HY000): Can't connect to MySQL server on '127.0.0.1'
+Ошибка 2003 обозначает, что в соединении было отказано, значит фаервол работет.
+
+Через MySQL Workbench тоже не подключается:
+2019-09-18 19:22:18 - Trying to connect to MySQL...
+2019-09-18 19:22:18 - Can't connect to MySQL server on 'localhost' (111) (2003)
+2019-09-18 19:22:18 - Assuming server is not running
+
+
+
+
+
+

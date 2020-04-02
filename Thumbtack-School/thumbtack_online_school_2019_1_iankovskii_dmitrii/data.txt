@@ -1,0 +1,5 @@
+[{"active":true,"id":1,"uuid":"aee56333-069b-4ee2-ba67-a88bbedae9af","firstName":"dimas","middleName":"vlab","lastName":"yank","street":"omskaya","login":"dimasyank","password":"dimaS19922","houseNumber":21,"apartmentNumber":21},{"active":true,"id":0,"uuid":"2cd7ca04-f356-4df6-8ae0-207508c9912c","firstName":"dima","middleName":"vlab","lastName":"yank","street":"omskaya","login":"dimayank","password":"dimaS19922","houseNumber":21,"apartmentNumber":21}]
+[{"candidateData":{"active":true,"id":0,"uuid":"2cd7ca04-f356-4df6-8ae0-207508c9912c","firstName":"dima","middleName":"vlab","lastName":"yank","street":"omskaya","login":"dimayank","password":"dimaS19922","houseNumber":21,"apartmentNumber":21},"proposerId":0,"verified":true}]
+{"0":{"programText":"prog","suggestionsToProgram":[{"authorId":1,"suggestionText":"sugg","ratings":{"0":3,"1":5},"approved":false}]}}
+{"1":0}
+true

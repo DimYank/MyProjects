@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for path in /etc/*
+do
+path=$(echo $path | tr / '\\' )
+echo "C:"$path 
+done
+
+echo "Task 5 done!"

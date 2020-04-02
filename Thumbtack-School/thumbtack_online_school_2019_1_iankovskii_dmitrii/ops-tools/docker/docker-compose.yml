@@ -1,0 +1,46 @@
+version: "3"
+networks:
+    docker-practice-net:
+
+services:
+    postgres_yank:
+        image: postgres:12.1
+        restart: always
+        ports:
+            - "5777:5432"
+        networks:
+            - docker-practice-net
+        volumes:
+            - "../../data/postgres:/var/lib/postgresql/data"
+            - "../../data/dump:/db-dump"
+        environment:
+            POSTGRES_PASSWORD: school
+            POSTGRES_USER: postgres
+            POSTGRES_DB: school
+        container_name: yank_postgr
+    redis_yank:
+        image: redis:5.0.7
+        restart: always
+        ports:
+            - "6777:6379"
+        networks:
+            - docker-practice-net
+        container_name: yank_redis
+    app_yank:
+        build:
+            context: ../..
+            dockerfile: ./ops-tools/docker/images/app/Dockerfile
+        restart: always
+        ports:
+            - "9777:9777"
+        networks:
+            - docker-practice-net
+        volumes:
+            - "../../:/app"
+        container_name: yank_app
+        depends_on:
+            - redis_yank
+            - postgres_yank
+            
+        
+        
