@@ -1,0 +1,33 @@
+@import "../../../theme"
+
+.menu
+  position: absolute
+  top: 0
+  bottom: 0
+  box-sizing: border-box
+  width: $header-desktop-width
+  padding: 5px
+  background: $blue
+  border-right: 1px solid $grey
+  font-family: $app-font
+  z-index: 500
+
+  .user-name
+    margin-top: 100px
+    color: white
+    font-size: 30px
+
+  .links-container
+    margin-top: 30px
+
+    .menu-link
+      display: block
+      background: $transparent-grey
+      color: $grey
+      text-decoration: none
+      margin-bottom: 5px
+      padding: 5px
+      font-size: 20px
+
+      &:hover
+        background: white

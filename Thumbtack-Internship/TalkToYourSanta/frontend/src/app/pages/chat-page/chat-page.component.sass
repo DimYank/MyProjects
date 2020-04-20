@@ -1,0 +1,48 @@
+@import "../../../theme"
+
+.chat-container
+  display: flex
+  flex: 1 1 auto
+  flex-direction: column
+  min-height: 0
+  margin: 0 20px 0 20px
+
+.pair-name
+  color: $blue
+  font-family: $app-font
+  font-size: 35px
+  padding-left: 20px
+  margin-top: 10px
+  align-self: center
+
+app-messages
+  max-width: 1200px
+  width: 100%
+  overflow: auto
+  align-self: center
+  flex: 1
+  box-shadow: $main-shadow
+  border-radius: 9px
+  margin: 20px 0 0 0
+  padding: 10px
+
+.chat-buttons
+  align-self: center
+
+  .button
+    color: grey
+    display: inline-block
+    font-family: $app-font
+    font-size: 20px
+    box-shadow: $chat-button-shadow
+    border-radius: 0 0 9px 9px
+    padding: 15px 12px
+    cursor: pointer
+    margin-left: 2px
+
+    &.selected
+      color: $blue
+      outline: none
+      background: white
+      position: relative
+      z-index: 200

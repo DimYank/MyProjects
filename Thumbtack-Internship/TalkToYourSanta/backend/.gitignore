@@ -1,0 +1,12 @@
+/node_modules
+.idea
+/dist
+/cert
+.env
+
+logs
+*.log
+
+pids
+*.pid
+*.seed

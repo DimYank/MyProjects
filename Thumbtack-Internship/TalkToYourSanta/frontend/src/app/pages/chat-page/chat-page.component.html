@@ -1,0 +1,37 @@
+<app-header></app-header>
+<div class="chat-container">
+  <div class="pair-name" *ngIf="isPairPresent()">
+    {{getPairName()}}
+  </div>
+  <app-messages
+    (connectionStatusUpdate)="updateConnectionStatus($event)"
+    (newMessage)="showNewMessageNotification($event)"
+    [hidden]="currentUserRole===giftee()"
+    userRole="{{santa()}}"
+  >
+  </app-messages>
+  <app-messages
+    (connectionStatusUpdate)="updateConnectionStatus($event)"
+    (newMessage)="showNewMessageNotification($event)"
+    [hidden]="currentUserRole===santa()"
+    userRole="{{giftee()}}"
+  ></app-messages>
+  <div class="chat-buttons">
+    <span
+      class="button"
+      [ngClass]="{'selected' : currentUserRole===giftee()}"
+      (click)="setRole(giftee())"
+    >
+      Chat With Santa
+    </span>
+    <span
+      class="button"
+      [ngClass]="{'selected' : currentUserRole===santa()}"
+      (click)="setRole(santa())"
+    >
+      Chat With Giftee
+    </span>
+  </div>
+  <app-footer [userRole]="currentUserRole"></app-footer>
+</div>
+<app-notification #notification ></app-notification>

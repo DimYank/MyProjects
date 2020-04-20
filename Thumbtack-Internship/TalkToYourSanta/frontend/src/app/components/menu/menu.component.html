@@ -1,0 +1,10 @@
+<div class="menu">
+  <div class="user-name">
+    {{getUserName()}}
+  </div>
+  <div class="links-container">
+    <a class="menu-link" routerLink="/chat">Chat</a>
+    <a class="menu-link" *ngIf="showAdminButton" routerLink="/admin">Administration</a>
+    <a class="menu-link" routerLink="/login" (click)="logOut()">Log Out</a>
+  </div>
+</div>

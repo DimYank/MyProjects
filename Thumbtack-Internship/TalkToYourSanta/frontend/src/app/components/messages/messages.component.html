@@ -1,0 +1,20 @@
+<div class="message-block"
+     *ngFor='let entry of messages | keyvalue: asIsOrder'
+     [ngClass]="{
+      'message-delivering' : !entry.value.delivered,
+      'message-block-user': entry.value.authorId === getUserId()
+    }"
+>
+  <div
+    class="message"
+    [ngClass]="{
+      'message-user': entry.value.authorId === getUserId()
+    }"
+  >
+    {{entry.value.text}}
+  </div>
+  <span class="date">{{entry.value.timestamp | date: 'short'}}</span><br>
+</div>
+<div class="no-pair-warning" *ngIf="!isPairPresent()">
+  <span>You have no pair in this chat :(<br>Ask admin to assign them!</span>
+</div>

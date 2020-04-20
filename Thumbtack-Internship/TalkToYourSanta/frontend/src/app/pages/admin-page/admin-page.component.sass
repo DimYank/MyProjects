@@ -1,0 +1,114 @@
+@import "../../../theme"
+
+.table-container
+  font-family: $app-font
+  display: flex
+  flex: 1 1 auto
+  flex-direction: column
+
+.assignment-table
+  width: 100%
+  max-width: 1400px
+  display: flex
+  flex: 1
+  flex-direction: row
+  @media (max-width: 1200px)
+    flex-direction: column
+  align-self: center
+  min-height: 0
+
+  .table
+    width: 100%
+    border-collapse: collapse
+
+  .table-column
+    margin: 10px
+    display: flex
+    flex-direction: column
+    flex: 1
+    min-height: 0
+
+    .column-header
+      font-size: 30px
+      text-align: center
+      margin: 10px 0 10px 0
+
+    .column-search
+      width: 100%
+      display: flex
+      margin-bottom: 5px
+
+      .input
+        flex: 1
+        font-size: 25px
+        border: $blue-border
+        border-right: none
+        border-radius: 4px 0 0 4px
+        padding: 3px
+
+        &:focus
+          outline: none
+
+      .button
+        border: $blue-border
+        border-left: none
+        border-radius: 0 4px 4px 0
+        background-color: white
+        padding-top: 3px
+
+        &:focus
+          outline: none
+
+.scrollable-container
+  flex: 1
+  overflow-y: auto
+  overflow-x: hidden
+  border: $blue-border
+
+.list-item, .list-item-assigned
+  font-size: 30px
+  border: $blue-border
+  padding-left: 10px
+  cursor: pointer
+
+  &:hover
+    color: $blue
+
+  &.list-item-selected
+    background-color: rgba(70, 128, 255, 0.3)
+    color: #4680ff
+
+  &.list-item-disabled
+    opacity: 0.5
+    cursor: not-allowed
+    text-decoration: line-through
+
+.list-item-assigned
+  background-color: $light-grey
+
+.table-buttons
+  margin: 5px 0 15px 0
+  text-align: center
+
+  .button,.button-danger
+    margin: 5px 5px 5px 5px
+    padding: 7px 5px 5px 5px
+    font-size: 25px
+    width: 300px
+    border: $blue-border
+    background-color: white
+
+    &:focus
+      outline: none
+
+    &:hover:enabled
+      outline: $blue solid 2px
+
+    &:disabled
+      background: $grayish-white
+
+  .button-danger
+    color: $warning-color
+
+    img
+      margin-bottom: -3px

@@ -1,0 +1,28 @@
+<div class="background"></div>
+<img class="logo" src="/assets/santa.svg">
+<div class="login-form-container">
+    <div class="title">
+      Talk To Your Santa
+    </div>
+    <input
+      class="login-username"
+      placeholder="Username"
+      [(ngModel)]="username"
+      (keyup.enter)="logInUser()"
+    >
+    <input
+      class="login-password"
+      placeholder="Password"
+      type="password"
+      [(ngModel)]="password"
+      (keyup.enter)="logInUser()"
+    >
+    <button
+      [disabled]="disableLogInButton || !username.length || !password.length"
+      class="login-button"
+      (click)="logInUser()"
+    >
+      Log In
+    </button>
+    <p *ngIf="warningMessage" class="login-warning">{{warningMessage}}</p>
+</div>

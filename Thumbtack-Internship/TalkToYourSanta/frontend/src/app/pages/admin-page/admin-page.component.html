@@ -1,0 +1,86 @@
+<app-header></app-header>
+<div class="table-container">
+  <div class="assignment-table">
+    <div class="table-column">
+      <div class="column-header">Choose Santa</div>
+      <div class="column-search">
+        <input class="input" [(ngModel)]="santaFilter" placeholder="Find">
+        <button class="button" (click)="clearSantaSearch()">
+          <img src="/assets/clear.png">
+        </button>
+      </div>
+      <div class="scrollable-container">
+        <table class="table" id="santas-list">
+          <tr *ngFor="let santa of filteredFreeSantas()">
+            <td
+              class="list-item"
+              [id]="santaId(santa)"
+              (click)="selectedGiftee !== santa && selectSanta(santa)"
+              [ngClass]="{'list-item-selected': selectedSanta===santa, 'list-item-disabled': selectedGiftee === santa}"
+            >
+              <span class="cell-text">{{santa}}</span>
+            </td>
+          </tr>
+          <tr *ngFor="let entry of filteredAssignedPairs() | keyvalue: sortPairsAsIs.bind(this)">
+            <td
+              class="list-item-assigned"
+              [id]="santaId(entry.key)"
+              (click)="selectPairToUnassign(entry.key)"
+              [ngClass]="{'list-item-selected': unassignSanta===entry.key}"
+            >
+              <span>{{entry.key}}</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="table-column">
+      <div class="column-header">Choose a Giftee</div>
+      <div class="column-search">
+        <input class="input" [(ngModel)]="gifteeFilter" placeholder="Find">
+        <button class="button" (click)="clearGifteeSearch()">
+          <img src="/assets/clear.png">
+        </button>
+      </div>
+      <div class="scrollable-container">
+        <table class="table" id="giftees-list">
+          <tr *ngFor="let giftee of filteredFreeGiftees()">
+            <td
+              class="list-item"
+              [id]="gifteeId(giftee)"
+              (click)="selectedSanta !== giftee && selectGiftee(giftee)"
+              [ngClass]="{'list-item-selected': selectedGiftee===giftee, 'list-item-disabled': selectedSanta === giftee}"
+            >
+              <span>{{giftee}}</span>
+            </td>
+          </tr>
+          <tr *ngFor="let entry of filteredAssignedPairs() | keyvalue: sortPairsAsIs.bind(this)">
+            <td
+              class="list-item-assigned"
+              [id]="gifteeId(entry.value)"
+              (click)="selectPairToUnassign(entry.key)"
+              [ngClass]="{'list-item-selected': unassignGiftee===entry.value}"
+            >
+              <span>{{entry.value}}</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="table-buttons">
+    <button class="button" [disabled]="!selectedSanta || !selectedGiftee" (click)="assignPair()">Assign Selected Pair
+    </button>
+    <button class="button" [disabled]="!unassignSanta" (click)="unassignPair()">Unassign Selected Pair</button>
+    <br>
+    <button class="button-danger" (click)="assignRandomPairs()">
+      <img src="/assets/dice.png">
+      Assign Random Pairs
+    </button>
+    <button class="button-danger" (click)="unassignAllPairs()">
+      <img src="/assets/danger.png">
+      Unassign All Pairs
+    </button>
+  </div>
+</div>
+<app-notification #notification></app-notification>

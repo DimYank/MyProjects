@@ -1,0 +1,10 @@
+<header class="header">
+  <div class="header-menu-button" (click)="toggleMenu()" [ngClass]="{'pressed': showMenu}">
+    <img src="/assets/icons8-menu-100.png">
+  </div>
+  <div class="header-title-container">
+    <h3>Talk To Your Santa</h3>
+    <img class="santa-svg" src="/assets/santa.svg">
+  </div>
+</header>
+<app-menu *ngIf="showMenu" [@inOutAnimation]></app-menu>

@@ -1,0 +1,16 @@
+<footer class="footer-container">
+    <textarea
+        class="input-text" 
+        rows="3"
+        placeholder="Type Your Message" 
+        spellcheck="false"
+        [(ngModel)]="inputText"
+        (keydown.enter)="onEnterKeyDown($event)"
+        (keyup.enter)="sendMessage()"
+        [disabled]="!isPairPresent()"
+    >
+    </textarea>
+    <button class="input-button" (click)="sendMessage()" [disabled]="!isPairPresent()">
+        <img style="margin-right: 4px;" src="/assets/send.png">
+    </button>
+</footer>

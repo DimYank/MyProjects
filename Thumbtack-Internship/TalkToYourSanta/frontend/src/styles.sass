@@ -1,0 +1,24 @@
+@font-face
+  font-family: "Gotham Pro"
+  src: url("assets/GothamPro.ttf") format("truetype")
+
+html, body
+  margin: 0
+  padding: 0
+  height: 100vh
+
+app-root
+  height: 100%
+
+app-chat-page, app-admin-page
+  height: 100%
+  display: flex
+  @media (max-width: 1200px)
+    flex-direction: column
+
+//app-chat-page
+//  @media (max-width: 1200px)
+//    flex-direction: column
+//
+//app-admin-page
+//  flex-direction: column

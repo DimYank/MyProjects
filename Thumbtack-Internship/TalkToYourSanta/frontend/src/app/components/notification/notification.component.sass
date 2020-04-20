@@ -1,0 +1,27 @@
+@import "../../../theme"
+.notifications-container
+  display: flex
+  flex-direction: column
+  justify-content: flex-end
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  width: $header-desktop-width
+  box-sizing: border-box
+  padding: 15px
+
+  .notification
+    background: $grayish-white
+    border: $light-border
+    border-radius: 6px
+    padding: 10px
+    margin-top: 5px
+
+    .close-button
+      float: right
+
+    .text
+      font-family: $app-font
+      font-size: 20px
+      overflow-wrap: break-word

@@ -1,0 +1,10 @@
+{
+  "presets": [
+    "env"
+  ],
+  "plugins": [
+    "inline-dotenv",
+    "dynamic-import-node",
+    "transform-object-rest-spread"
+  ]
+}
